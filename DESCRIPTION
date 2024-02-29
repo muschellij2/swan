@@ -1,0 +1,23 @@
+Package: swan
+Title: Estimate Sleep-wear, Wake-wear, and Non-wear ('SWaN') in Wrist-Worn Accelerometer Data
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "John",
+           family = "Muschelli",
+           role = c("aut", "cre"),
+           email = "muschellij2@gmail.com",
+           comment = c(ORCID = "0000-0001-6469-1750"))
+Description: Wraps the Python implementation 
+  <https://github.com/binodthapachhetry/SWaN> mapped out in 'Detecting Sleep 
+  and Nonwear in 24-h Wrist Accelerometer Data from the National Health and 
+  Nutrition Examination Survey'
+  <https://doi.org/10.1249%2FMSS.0000000000002973> to estimate
+  Sleep-wear, Wake-wear, and Non-wear ('SWaN') in wrist-worn accelerometry.  
+  Creates a specific 'conda' environment and wrappers apply this to raw 
+  data (sub-second) to get an estimate of non-wear in 30 second blocks.
+License: GPL (>= 3)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1
+Imports: 
+    reticulate
