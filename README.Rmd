@@ -31,9 +31,14 @@ remotes::install_github("jhuwit/swan")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
-
 ```{r example}
 library(swan)
+unset_reticulate_python()
+use_swan_condaenv()
+file = system.file("extdata", "73557_subset.csv.gz", package = "swan")
+df = readr::read_csv(file)
+readr::stop_for_problems(df)
+out = swan(df, sampling_rate = 80L)
+out$second_pass %>% dplyr::count(prediction)
 ## basic example code
 ```

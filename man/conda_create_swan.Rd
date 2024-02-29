@@ -2,12 +2,27 @@
 % Please edit documentation in R/conda_create_swan.R
 \name{conda_create_swan}
 \alias{conda_create_swan}
+\alias{use_swan_condaenv}
+\alias{unset_reticulate_python}
 \alias{have_swan_condaenv}
+\alias{swan_version}
+\alias{have_swan}
+\alias{swan_check}
 \title{Create Conda Environmment for \code{swan}}
 \usage{
 conda_create_swan(envname = "swan", ...)
 
+use_swan_condaenv(envname = "swan")
+
+unset_reticulate_python()
+
 have_swan_condaenv(envname = "swan")
+
+swan_version()
+
+have_swan()
+
+swan_check()
 }
 \arguments{
 \item{envname}{conda environment name for the modules to be installed}

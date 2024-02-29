@@ -26,9 +26,30 @@ remotes::install_github("jhuwit/swan")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
-
 ``` r
 library(swan)
+unset_reticulate_python()
+use_swan_condaenv()
+file = system.file("extdata", "73557_subset.csv.gz", package = "swan")
+df = readr::read_csv(file)
+#> Rows: 1440001 Columns: 4
+#> ── Column specification ────────────────────────────────────────────────────────
+#> Delimiter: ","
+#> dbl  (3): X, Y, Z
+#> dttm (1): HEADER_TIMESTAMP
+#> 
+#> ℹ Use `spec()` to retrieve the full column specification for this data.
+#> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+readr::stop_for_problems(df)
+out = swan(df, sampling_rate = 80L)
+#> Computing features...
+#> 17:38:38 Performing window-level classification...
+out$second_pass %>% dplyr::count(prediction)
+#> # A tibble: 3 × 2
+#>   prediction     n
+#>   <chr>      <int>
+#> 1 Nonwear      121
+#> 2 Sleep        126
+#> 3 Wear         353
 ## basic example code
 ```
