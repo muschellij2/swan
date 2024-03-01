@@ -23,6 +23,7 @@ Imports:
     assertthat,
     dplyr,
     janitor,
+    lubridate,
     magrittr,
     reticulate
 Suggests: 

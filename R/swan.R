@@ -7,7 +7,12 @@
 sw_first_pass = function(df, sampling_rate) {
   sw = swan_base()
   df = standardize_data(df)
-  out = sw$swan_first_pass$estimate_nonwear(df = df, sampling_rate = sampling_rate)
+  tzone = attr(df$HEADER_TIME_STAMP, "tzone")
+  out = sw$swan_first_pass$estimate_nonwear(df = df,
+                                            sampling_rate = sampling_rate)
+  attr(out$HEADER_TIME_STAMP, "tzone") = tzone
+  attr(out$STOP_TIME, "tzone") = tzone
+  attr(out$START_TIME, "tzone") = tzone
   return(out)
 }
 
@@ -20,7 +25,11 @@ sw_first_pass = function(df, sampling_rate) {
 #' @examples
 sw_second_pass = function(df) {
   sw = swan_base()
+  tzone = attr(df$HEADER_TIME_STAMP, "tzone")
   out = sw$swan_second_pass$correct_nonwear_predictions(df = df)
+  attr(out$HEADER_TIME_STAMP, "tzone") = tzone
+  attr(out$STOP_TIME, "tzone") = tzone
+  attr(out$START_TIME, "tzone") = tzone
   return(out)
 }
 
@@ -52,6 +61,8 @@ sw_second_pass = function(df) {
 #'   out$second_pass %>% dplyr::count(prediction)
 #' }
 swan = function(df, sampling_rate) {
+  header_time_stamp = predicted = prediction = NULL
+  rm(list = c("header_time_stamp", "predicted", "prediction"))
   assertthat::assert_that(
     is.data.frame(df),
     assertthat::is.count(sampling_rate)
@@ -63,8 +74,13 @@ swan = function(df, sampling_rate) {
   corrected = sw_second_pass(df = nonwear)
   nonwear = janitor::clean_names(nonwear)
   nonwear = dplyr::as_tibble(nonwear)
+  nonwear = nonwear %>%
+    dplyr::select(header_time_stamp, predicted, dplyr::everything())
   corrected = janitor::clean_names(corrected)
   corrected = dplyr::as_tibble(corrected)
+  corrected = corrected %>%
+    dplyr::select(header_time_stamp, prediction, predicted,
+                  dplyr::everything())
   list(
     first_pass = nonwear,
     second_pass = corrected

@@ -29,6 +29,8 @@ standardize_data = function(data) {
   }
   data = data %>%
     dplyr::select(HEADER_TIMESTAMP, X, Y, Z)
+  tz = lubridate::tz(df$HEADER_TIMESTAMP)
+  attr(df$HEADER_TIMESTAMP, "tzone") <- tz
   data = data %>%
     dplyr::rename(HEADER_TIME_STAMP = HEADER_TIMESTAMP,
            X_ACCELERATION_METERS_PER_SECOND_SQUARED = X,
