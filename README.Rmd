@@ -39,6 +39,8 @@ file = system.file("extdata", "73557_subset.csv.gz", package = "swan")
 df = readr::read_csv(file)
 readr::stop_for_problems(df)
 out = swan(df, sampling_rate = 80L)
+head(out$first_pass)
+head(out$second_pass)
 out$second_pass %>% dplyr::count(prediction)
 ## basic example code
 ```

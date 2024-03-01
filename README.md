@@ -43,7 +43,40 @@ df = readr::read_csv(file)
 readr::stop_for_problems(df)
 out = swan(df, sampling_rate = 80L)
 #> Computing features...
-#> 17:38:38 Performing window-level classification...
+#> 21:55:23 Performing window-level classification...
+head(out$first_pass)
+#> # A tibble: 6 × 23
+#>   header_time_stamp   predicted x_domfreq y_domfreq z_domfreq x_domfreq_power
+#>   <dttm>                  <dbl>     <dbl>     <dbl>     <dbl>           <dbl>
+#> 1 2000-01-10 15:00:00         2    0         0        20              0      
+#> 2 2000-01-10 15:00:30         2    0         0        20              0      
+#> 3 2000-01-10 15:01:00         2    0         0        20              0      
+#> 4 2000-01-10 15:01:30         2    0         0        20              0      
+#> 5 2000-01-10 15:02:00         0    9.37      9.63      0.0333         0.00472
+#> 6 2000-01-10 15:02:30         1    0.0333    0.0333    0.0333         0.00162
+#> # ℹ 17 more variables: y_domfreq_power <dbl>, z_domfreq_power <dbl>,
+#> #   x_totpow <dbl>, y_totpow <dbl>, z_totpow <dbl>, ori_x_median <dbl>,
+#> #   ori_y_median <dbl>, ori_z_median <dbl>, ori_var_sum <dbl>,
+#> #   ori_range_max <dbl>, smv_energy_sum <dbl>, smv_energy_var <dbl>,
+#> #   start_time <dttm>, stop_time <dttm>, prob_wear <dbl>, prob_sleep <dbl>,
+#> #   prob_nwear <dbl>
+head(out$second_pass)
+#> # A tibble: 6 × 27
+#>   header_time_stamp   predicted prediction x_domfreq y_domfreq z_domfreq
+#>   <dttm>                  <dbl> <chr>          <dbl>     <dbl>     <dbl>
+#> 1 2000-01-10 15:00:00         1 Sleep         0         0        20     
+#> 2 2000-01-10 15:00:30         1 Sleep         0         0        20     
+#> 3 2000-01-10 15:01:00         1 Sleep         0         0        20     
+#> 4 2000-01-10 15:01:30         1 Sleep         0         0        20     
+#> 5 2000-01-10 15:02:00         0 Sleep         9.37      9.63      0.0333
+#> 6 2000-01-10 15:02:30         1 Sleep         0.0333    0.0333    0.0333
+#> # ℹ 21 more variables: x_domfreq_power <dbl>, y_domfreq_power <dbl>,
+#> #   z_domfreq_power <dbl>, x_totpow <dbl>, y_totpow <dbl>, z_totpow <dbl>,
+#> #   ori_x_median <dbl>, ori_y_median <dbl>, ori_z_median <dbl>,
+#> #   ori_var_sum <dbl>, ori_range_max <dbl>, smv_energy_sum <dbl>,
+#> #   smv_energy_var <dbl>, start_time <dttm>, stop_time <dttm>, prob_wear <dbl>,
+#> #   prob_sleep <dbl>, prob_nwear <dbl>, prob_wear_smooth <list>,
+#> #   prob_sleep_smooth <list>, prob_nwear_smooth <list>
 out$second_pass %>% dplyr::count(prediction)
 #> # A tibble: 3 × 2
 #>   prediction     n
