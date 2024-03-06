@@ -17,7 +17,7 @@ conda_create_swan = function(envname = "swan", ...) {
   )
   reticulate::py_install(
     packages = "git+https://github.com/muschellij2/SWaN_accel",
-    pip = TRUE, envname = envname)
+    pip = TRUE, envname = envname, method = "conda")
   invisible(NULL)
 }
 
