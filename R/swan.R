@@ -10,9 +10,11 @@ sw_first_pass = function(df, sampling_rate) {
   tzone = attr(df$HEADER_TIME_STAMP, "tzone")
   out = sw$swan_first_pass$estimate_nonwear(df = df,
                                             sampling_rate = sampling_rate)
-  attr(out$HEADER_TIME_STAMP, "tzone") = tzone
-  attr(out$STOP_TIME, "tzone") = tzone
-  attr(out$START_TIME, "tzone") = tzone
+  if (!is.null(out)) {
+    attr(out$HEADER_TIME_STAMP, "tzone") = tzone
+    attr(out$STOP_TIME, "tzone") = tzone
+    attr(out$START_TIME, "tzone") = tzone
+  }
   return(out)
 }
 

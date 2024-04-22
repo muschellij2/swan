@@ -1,6 +1,6 @@
 Package: swan
 Title: Estimate Sleep-wear, Wake-wear, and Non-wear ('SWaN') in Wrist-Worn Accelerometer Data
-Version: 0.1.1
+Version: 0.2.0
 Authors@R: 
     person(given = "John",
            family = "Muschelli",
