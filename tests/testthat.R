@@ -7,18 +7,9 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(swan)
-rtp = Sys.getenv("RETICULATE_PYTHON")
-unset_reticulate_python()
-remove_swan_condaenv = FALSE
-if (!have_swan_condaenv()) {
-  remove_swan_condaenv = TRUE
-  swan::conda_create_swan(envname = "swan")
+if (swan::have_swan_condaenv("swan")) {
+  swan::use_swan_condaenv("swan")
 }
-use_swan_condaenv()
+library(swan)
 
 test_check("swan")
-Sys.setenv("RETICULATE_PYTHON" = rtp)
-if (remove_swan_condaenv) {
-  reticulate::conda_remove(envname = "swan")
-}
