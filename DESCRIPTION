@@ -1,6 +1,6 @@
 Package: swan
 Title: Estimate Sleep-wear, Wake-wear, and Non-wear ('SWaN') in Wrist-Worn Accelerometer Data
-Version: 0.2.0
+Version: 0.3.0
 Authors@R: 
     person(given = "John",
            family = "Muschelli",
@@ -18,7 +18,6 @@ Description: Wraps the Python implementation
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
 Imports: 
     assertthat,
     dplyr,
@@ -30,3 +29,4 @@ Suggests:
     readr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+RoxygenNote: 7.3.3
