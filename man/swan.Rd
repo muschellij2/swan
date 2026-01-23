@@ -4,13 +4,13 @@
 \alias{swan}
 \title{Run SWaN}
 \usage{
-swan(df, sampling_rate)
+swan(df, sample_rate)
 }
 \arguments{
 \item{df}{A \code{data.frame} with \code{X/Y/Z} and a time in
 \code{HEADER_TIMESTAMP}/\code{HEADER_TIME_STAMP}.}
 
-\item{sampling_rate}{the sampling rate of the data}
+\item{sample_rate}{the sampling rate of the data}
 }
 \value{
 A \code{data.frame} of predictions.
@@ -33,7 +33,7 @@ if (swan_check()) {
                                     "\%Y-\%m-\%dT\%H:\%M:\%OS")) \%>\%
       dplyr::as_tibble()
   }
-  out = swan(df, sampling_rate = 80L)
+  out = swan(df, sample_rate = 80L)
   out$second_pass \%>\% dplyr::count(prediction)
 }
 }

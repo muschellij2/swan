@@ -4,13 +4,13 @@
 \alias{sw_first_pass}
 \title{Run SWaN First Pass Prediction of Non-wear}
 \usage{
-sw_first_pass(df, sampling_rate)
+sw_first_pass(df, sample_rate)
 }
 \arguments{
 \item{df}{A \code{data.frame} with \code{X/Y/Z} and a time in
 \code{HEADER_TIMESTAMP}/\code{HEADER_TIME_STAMP}.}
 
-\item{sampling_rate}{the sampling rate of the data}
+\item{sample_rate}{the sampling rate of the data}
 }
 \value{
 A \code{data.frame} of predictions, without names changed

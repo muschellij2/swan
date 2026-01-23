@@ -5,7 +5,7 @@ testthat::test_that("swan gives 3 classes works", {
 
   df = readr::read_csv(file)
   readr::stop_for_problems(df)
-  out = swan(df, sampling_rate = 80L)
+  out = swan(df, sample_rate = 80L)
   testthat::expect_named(
     out, c("first_pass", "second_pass")
   )

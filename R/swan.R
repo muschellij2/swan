@@ -4,12 +4,12 @@
 #' @return A `data.frame` of predictions, without names changed
 #' from the Python output
 #' @examples
-sw_first_pass = function(df, sampling_rate) {
+sw_first_pass = function(df, sample_rate) {
   sw = swan_base()
   df = standardize_data(df)
   tzone = attr(df$HEADER_TIME_STAMP, "tzone")
   out = sw$swan_first_pass$estimate_nonwear(df = df,
-                                            sampling_rate = sampling_rate)
+                                            sampling_rate = sample_rate)
   if (!is.null(out)) {
     attr(out$HEADER_TIME_STAMP, "tzone") = tzone
     attr(out$STOP_TIME, "tzone") = tzone
@@ -40,7 +40,7 @@ sw_second_pass = function(df) {
 #'
 #' @param df A `data.frame` with `X/Y/Z` and a time in
 #' `HEADER_TIMESTAMP`/`HEADER_TIME_STAMP`.
-#' @param sampling_rate the sampling rate of the data
+#' @param sample_rate the sampling rate of the data
 #'
 #' @return A `data.frame` of predictions.
 #' @export
@@ -59,17 +59,17 @@ sw_second_pass = function(df) {
 #'                                     "%Y-%m-%dT%H:%M:%OS")) %>%
 #'       dplyr::as_tibble()
 #'   }
-#'   out = swan(df, sampling_rate = 80L)
+#'   out = swan(df, sample_rate = 80L)
 #'   out$second_pass %>% dplyr::count(prediction)
 #' }
-swan = function(df, sampling_rate) {
+swan = function(df, sample_rate) {
   header_time_stamp = predicted = prediction = NULL
   rm(list = c("header_time_stamp", "predicted", "prediction"))
   assertthat::assert_that(
     is.data.frame(df),
-    assertthat::is.count(sampling_rate)
+    assertthat::is.count(sample_rate)
   )
-  nonwear = sw_first_pass(df = df, sampling_rate = sampling_rate)
+  nonwear = sw_first_pass(df = df, sample_rate = sample_rate)
   if (is.null(nonwear) || nrow(nonwear) == 0) {
     stop("First pass did not detect any data/features, cannot get non-wear")
   }
